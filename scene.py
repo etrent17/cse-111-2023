@@ -46,8 +46,7 @@ def main():
     space = 5
     interval = diameter + space
 
-    # Draw a row of fence with
-    # white fencing on part of it
+    # draw some random trees
     x = -1
     y = 0
     for i in range(50):
@@ -57,8 +56,7 @@ def main():
                     x + diameter, y + 200, fill="white")
         x += interval
 
-    # Draw a row of fence with
-    # white fencing on part of it
+    # Draw some random fences
     x = -10
     y = 0
     for i in range(100):
@@ -86,8 +84,18 @@ def draw_ground(canvas, draw_width, draw_height):
         draw_width, draw_height / 3, width=0, fill = 'tan4')
 
 def draw_clouds(canvas, draw_w, draw_h, max_diam, half_height):
-    x = random.randint(0, draw_w - max_diam)
-    y = random.randint(0, half_height)
+    x = 200
+    y = 400
+    # diameter = random.randint(min_diam, max_diam)
+    draw_oval(canvas, x, y, 2 * x, y + max_diam,
+            fill="white")
+    x = 250
+    y = 375
+    # diameter = random.randint(min_diam, max_diam)
+    draw_oval(canvas, x, y, 2 * x, y + max_diam,
+            fill="white")
+    x = 200
+    y = 300
     # diameter = random.randint(min_diam, max_diam)
     draw_oval(canvas, x, y, 2 * x, y + max_diam,
             fill="white")
