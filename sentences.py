@@ -97,6 +97,73 @@ def get_verb(quantity, tense):
     word = random.choice(words)
     return word
 
+def get_preposition():
+    """Return a randomly chosen preposition
+    from this list of prepositions:
+        "about", "above", "across", "after", "along",
+        "around", "at", "before", "behind", "below",
+        "beyond", "by", "despite", "except", "for",
+        "from", "in", "into", "near", "of",
+        "off", "on", "onto", "out", "over",
+        "past", "to", "under", "with", "without"
+
+    Return: a randomly chosen preposition.
+    """
+    prepositions = ["about", "above", "across", "after", "along",
+                    "around", "at", "before", "behind", "below",
+                    "beyond", "by", "despite", "except", "for",
+                    "from", "in", "into", "near", "of",
+                    "off", "on", "onto", "out", "over",
+                    "past", "to", "under", "with", "without"]
+    preposition = random.choice(prepositions)
+    return preposition
+
+
+def get_prepositional_phrase(quantity):
+    """Build and return a prepositional phrase composed
+    of three words: a preposition, a determiner, and a
+    noun by calling the get_preposition, get_determiner,
+    and get_noun functions.
+
+    Parameter
+        quantity: an integer that determines if the
+            determiner and noun in the prepositional
+            phrase returned from this function should
+            be single or pluaral.
+    Return: a prepositional phrase.
+    """
+    prep_phrase = ''
+    if quantity == 1:
+        singular_prep = get_preposition()
+        singular_determiner = get_determiner(1)
+        singular_noun = get_noun(1)
+        prep_phrase = f"{singular_prep} {singular_determiner} {singular_noun}"
+    else:
+        make_preposition = get_preposition()
+        multiple_determiner = get_determiner(2)
+        multiple_noun = get_noun(2)
+        prep_phrase = f"{make_preposition} {multiple_determiner} {multiple_noun}"
+    
+    return prep_phrase
+
+def get_adverb():
+    adverbs = ['likely',
+                'delightfully',
+                'yearly',
+                'voluntarily',
+                'quaintly',
+                'originally',
+                'queasily',
+                'tediously',
+                'offensively',
+                'curiously',
+                'sheepishly',
+                'inquisitively'
+                ]
+    adverb = random.choice(adverbs)
+    return adverb
+
+
 def main():
     words = []
     quantity_val = 0
@@ -127,6 +194,8 @@ def main():
         article_val = get_determiner(quantity_val)
         noun_val = get_noun(quantity_val)
         verb_val = get_verb(quantity_val, v_tense)
-        print(f'{article_val.capitalize()} {noun_val} {verb_val}.')
+        prep_string = get_prepositional_phrase(quantity_val)
+        adverb_string = get_adverb()
+        print(f'{article_val.capitalize()} {noun_val} {adverb_string} {verb_val} {prep_string}.')
 if __name__ == "__main__":
     main()
