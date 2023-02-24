@@ -100,7 +100,9 @@ def print_death_age(people_dict):
             person_key: [name, gender, birth_year, death_year]
     Return: nothing
     """
-    pass
+    for person_key, person_data in people_dict.items():
+            print(f"{person_data[0]}, death {person_data[3]}")        
+
 
 
 def count_genders(people_dict):
@@ -113,7 +115,21 @@ def count_genders(people_dict):
             person_key: [name, gender, birth_year, death_year]
     Return: nothing
     """
-    pass
+    male_count = 0
+    female_count = 0
+    for male in people_dict.items():
+        # key = male[0]
+        value = male[1]
+        # print(value[1])
+        if value[1] == "M":
+            male_count += 1
+        else:
+            female_count += 1
+    print('----------------------------')
+    print(f'number of males: {male_count}, number of females: {female_count}')
+    print('----------------------------')
+
+
 
 
 def print_marriages(marriages_dict, people_dict):
@@ -130,7 +146,40 @@ def print_marriages(marriages_dict, people_dict):
             person_key: [name, gender, birth_year, death_year]
     Return: nothing
     """
-    pass
+    year = []
+    husband_id = []
+    bride_id = []
+    for item in marriages_dict.items():
+        # print(item[1][0])
+        husband_id.append(item[1][0])
+        bride_id.append(item[1][1])
+        year.append(item[1][2])
+    
+    for j in range(0, len(year)):
+        # print(year[j], husband_id[j], bride_id[j])
+        # husband_name = people_dict[husband_id[j][0]]
+        # husband_age = year[j] - people_dict[husband_id[j][2]]
+        # print(f'{husband_name}, {husband_age}')
+        # print(people_dict[husband_id[j]])
+        husband_data = people_dict[husband_id[j]]
+        husband_name = husband_data[0]
+        husband_age = year[j] - husband_data[2]
+        wife_data = people_dict[bride_id[j]]
+        wife_name = wife_data[0]
+        wife_age = year[j] - wife_data[2]
+        print(f'Name: {husband_name}, Age: {husband_age}')
+        print(f'Year of Wedding: {year[j]}')
+        print(f'Name: {wife_name}, Age: {wife_age}')
+        len_string = len(f'Name: {wife_name}, Age: {wife_age}')
+        print('-' * len_string)
+
+
+
+    # print('name and age of husband')
+    # print('year of wedding')
+    # print('name and age of bride')
+
+
 
 
 # If this file was executed like this:
