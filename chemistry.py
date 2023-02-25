@@ -1,3 +1,7 @@
+"""Elijah Trent, CSE 111, Winter 2023
+
+Chemistry Calculator for a given Chemical Formula"""
+
 from formula import parse_formula
 
 
@@ -204,6 +208,27 @@ def make_periodic_table():
     """
     return periodic_table_dict
 
+def get_formula_name(formula, known_molecules_dict):
+    """Try to find formula in the known_molecules_dict.
+    If formula is in the known_molecules_dict, return
+    the name of the chemical formula; otherwise return
+    "unknown compound".
+
+    Parameters
+        formula is a string that contains a chemical formula
+        known_molecules_dict is a dictionary that contains
+            known chemical formulas and their names
+    Return: the name of a chemical formula
+    """
+    formula = formula.upper()
+    if formula in known_molecules_dict:
+        return known_molecules_dict[formula]
+    else:
+        return "unknown compound"
+    
+    # return result
+
+    
 
 # Indexes for inner lists in the periodic table
 NAME_INDEX = 0
@@ -254,16 +279,37 @@ def compute_molar_mass(symbol_quantity_list, periodic_table_dict):
     return total_molar_mass
 
 
-
+def make_molecules_dict():
+    known_molecules_dict = {
+        "Al2O3": "aluminum oxide",
+        "CH3OH": "methanol",
+        "C2H6O": "ethanol",
+        "C2H5OH": "ethanol",
+        "C3H8O": "isopropyl alcohol",
+        "C3H8": "propane",
+        "C4H10": "butane",
+        "C6H6": "benzene",
+        "C6H14": "hexane",
+        "C8H18": "octane",
+        "CH3(CH2)6CH3": "octane",
+        "C13H18O2": "ibuprofen",
+        "C13H16N2O2": "melatonin",
+        "Fe2O3": "iron oxide",
+        "FeS2": "iron pyrite",
+        "H2O": "water"
+    }
+    return known_molecules_dict
 
 
 
 def main():
+    chemical_formula = ''
     # Get a chemical formula for a molecule from the user.
-    chemical_forumla = input("What is your chemical formula? ")
+    chemical_formula = input("What is your chemical formula? ")
+    chemical_formula = chemical_formula.upper()
 
     # Get the mass of a chemical sample in grams from the user.
-    sample_mass = float("What is your sample mass?")
+    sample_mass = float(input("What is your sample mass? "))
 
     # Call the make_periodic_table function and
     # store the periodic table in a variable.
@@ -273,15 +319,29 @@ def main():
     # chemical formula given by the user to a compound
     # list that stores element symbols and the quantity
     # of atoms of each element in the molecule.
+    compound_list = parse_formula(chemical_formula, p_dict)
 
     # Call the compute_molar_mass function to compute the
     # molar mass of the molecule from the compound list.
+    compound_mass = compute_molar_mass(compound_list, p_dict)
 
     # Compute the number of moles in the sample.
+    num_moles = sample_mass / compound_mass
 
+    # Call the molecule dictionary function
+    molecule_dict = make_molecules_dict()
+
+    #get formula name for user
+    name_of_formula = get_formula_name(chemical_formula, molecule_dict)
+
+    #print formula name to console
+    print(f'The name of your formula is {name_of_formula.capitalize()}')
     # Print the molar mass.
+    print(f"The molar mass of your molecule is {compound_mass} g/mol")
 
     # Print the number of moles.
+    print(f"The number of moles in your sample is {num_moles} mol")
+
 
 if __name__ == "__main__":
     main()
