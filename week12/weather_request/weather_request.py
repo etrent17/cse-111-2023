@@ -2,21 +2,32 @@
 CSE 111 Milestone
 Elijah Trent
 Weather Request in Python
+Please set environment variable before running in Python 3
 
 Requires API Key from OpenWeatherMap.org
 
 User inputs city and python returns meteorological info about requested city
+
+
 """
 import os
 import requests
 import json
 import numpy
 
+# TODO ask user if they want current conditions 
 def main():
     API_KEY = get_api_key()
-    # print(API_KEY)
-    main_url = get_base_url()
-
+    if API_KEY is not False:
+        print(API_KEY)
+       
+    else:
+        print("API Key failed, please check your environment variables. Goodbye.")
+        exit()
+    main_url = current_condition_base()
+    
+    question_report = 'Do you need the current conditions or a forecast? [forecast/current] '
+    question_forecast = 'Do you need hourly (12 hours), 3-day or 10-day? [hour, 3-day, 10-day] '
     question_city = 'Please input your desired city: [please no commas/spaces] '
     question_units = 'Do you use imperial units? [y/n] '
     is_imperial = ''
@@ -24,14 +35,32 @@ def main():
     print()
     desired_city = input(question_city)
     desired_units = input(question_units)
+    desired_report = input(question_report)
+    desired_forecast = input(question_forecast)
     print()
 
     if desired_units.lower().strip() == 'y':
         is_imperial = True
     else:
         is_imperial = False
+    
+    if desired_report.lower().strip() == 'forecast':
+        print('forecast')
+    elif desired_report.lower().strip() == 'current':
+        print('current')
+    else:
+        print('Input not recognized, please try again.')
 
-    request_url = build_request_url(main_url, API_KEY, desired_city)
+    if desired_forecast.lower().strip() == 'hour':
+        print('hour')
+    elif desired_forecast.lower().strip() == '3-day':
+        print('3 day')
+
+    elif desired_forecast.lower().strip() == '10-day':
+        print('10 day')
+
+
+    request_url = current_condition_url(main_url, API_KEY, desired_city)
 
     result = send_request(request_url)
     # print(result)
@@ -63,16 +92,21 @@ def main():
 
 
 def get_api_key():
-    #get api key from environment variables
-    KEY = os.getenv('WEATHERKEY')
-    return KEY
-
-def get_base_url():
+    try:
+        #get api key from environment variables
+        KEY = os.getenv('WEATHERKEY')
+        if KEY is not None:
+            return KEY
+        else:
+            return False
+    except Exception as e:
+        print(f"Your error: {e}")
+def current_condition_base():
     #return base url for weather API
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
     return base_url
 
-def build_request_url(base_url, api_key, name_of_city):
+def current_condition_url(base_url, api_key, name_of_city):
     #uses base url, adds api key and name of reuqested city to build proper URL
     return f"{base_url}appid={api_key}&q={name_of_city}"
 
