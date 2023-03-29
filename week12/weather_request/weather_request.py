@@ -8,7 +8,7 @@ Requires API Key from OpenWeatherMap.org
 
 $Env:WEATHERKEY="<api_key>"
 User inputs city and python returns meteorological info about requested city
-c0dd2359fa1832eb73fc42e35257fe78
+
 
 """
 import os
