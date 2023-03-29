@@ -1,8 +1,8 @@
 def from_kelvin_farenheit(kelvin):
-    return kelvin * 1.8 - 459.67
+    return round(kelvin * 1.8 - 459.67, 2)
 
 def from_kelvin_celcius(kelvin):
-    return kelvin - 237.15
+    return round(kelvin - 237.15, 2)
 
 def from_hpa_psi(hpa):
     return hpa * 0.0145037738 

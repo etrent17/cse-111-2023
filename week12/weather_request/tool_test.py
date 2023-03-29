@@ -1,0 +1,39 @@
+from convert_tools import *
+import pytest
+
+num=0
+
+temp_list = [250,270,300,330]
+
+def test_from_k_farenheit():
+
+    assert from_kelvin_farenheit(temp_list[0]) == -9.67
+    assert from_kelvin_farenheit(temp_list[1]) == 26.33
+    assert from_kelvin_farenheit(temp_list[2]) == 80.33
+    assert from_kelvin_farenheit(temp_list[3]) == 134.33
+
+def test_from_kelvin_celcius():
+    assert from_kelvin_celcius(temp_list[0]) == -23.15
+    assert from_kelvin_celcius(temp_list[1]) == -3.15
+    assert from_kelvin_celcius(temp_list[2]) == 26.85
+    assert from_kelvin_celcius(temp_list[3]) == 56.85
+
+hpa_list = [1000,1500,2000,2500]
+
+def test_from_hpa_psi():
+    assert from_hpa_psi(hpa_list[0]) == ...
+    assert from_hpa_psi(hpa_list[1]) == ...
+    assert from_hpa_psi(hpa_list[2]) == ...
+    assert from_hpa_psi(hpa_list[3]) == ...
+
+def test_from_ms_mph():
+    assert from_ms_mph(num) == ...
+    assert from_ms_mph(num) == ...
+    assert from_ms_mph(num) == ...
+    assert from_ms_mph(num) == ...
+
+def test_from_ms_kph():
+    assert from_ms_kph(num) == ...
+    assert from_ms_kph(num) == ...
+    assert from_ms_kph(num) == ...
+    assert from_ms_kph(num) == ...
