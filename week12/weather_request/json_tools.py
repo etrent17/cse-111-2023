@@ -6,7 +6,7 @@ def send_request(requested_url):
     return requests.get(requested_url)
 
 def read_json_data(input_data):
-    #uses input data and returns it as json format
+    #uses input data and returns it to main program
     return input_data.json()
 
 def not_json(json_data):
